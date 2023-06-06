@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is a demonstration for Export To PDF feature in Django Admin Panel">
+    <meta name="robots" content="INDEX, FOLLOW">
+    <title>PDF Download</title>
+    <link rel="stylesheet" href="{% static 'pdfstyle.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    {%for record in all_records%}
+        {% comment %} PDF print button {% endcomment %}
+        <div class="card">
+            <button onclick="document.title='{{record.name}}'; printPageArea('{{record.name}}')">Print PDF for {{record.name}} </button>
+        </div>
+        <div id="{{record.name}}" class="container">
+            <div class="card">
+                <form class="card-form" method="post">
+                    {% comment %} Photograph {% endcomment %}
+                    <div class="input">
+                        <img src="{{record.photograph.url}}" width=160px>
+                    </div>
+                    <div class="input">
+                        <input type="text" class="input-field-pdf" value="{{record.name}}" readonly />
+                        <label class="input-label">1. Name</label>
+                    </div>
+                    <div class="input">
+                        <input type="text" class="input-field-pdf" value="{{record.email}}" readonly />
+                        <label class="input-label">2. Email</label>
+                    </div>
+                    <div class="input">
+                        <input type="text" class="input-field-pdf" value="{{record.phone_number}}" readonly />
+                        <label class="input-label">3. Phone Number</label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+</body>
+</html>
+
+<script>
+    function printFunction() { 
+      window.print(); 
+    }
+
+    function printPageArea(areaID){
+        var printContent = document.getElementById(areaID).innerHTML;
+        var originalContent = document.body.innerHTML;
+        document.body.innerHTML = printContent;
+        window.print();
+        document.body.innerHTML = originalContent;
+        document.title = 'Download PDFs';
+    }
+</script>

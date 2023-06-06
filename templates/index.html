@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is a demonstration for Export To PDF feature in Django Admin Panel">
+    <meta name="robots" content="INDEX, FOLLOW">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="card">
+        <div class="centered">
+            <h1 class="input-label-main">Demo Form for PDF Export Django</h1> <br>
+        </div><br>
+        <form action="/index/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="input">
+                <input name="name" type="text" class="input-field" placeholder=" (Full Name)" required/>
+            </div>
+            <div class="input">
+                <input name="email" type="email" class="input-field" placeholder=" (Email ID)" required/>
+            </div>
+            <div class="input">
+                <input name="phone_number" type="text" class="input-field" placeholder=" (Without Country Code)" required/>
+            </div>
+            <div class="input">
+                <input name="photograph" id="myfile1" type="file" accept="image/*" placeholder=" ( Image)" required/>
+                <label for="myfile1" class="custom-file-upload">Upload Image</label>
+            </div>
+            <div class="action">
+                <input class="action-button" type="submit" value="Submit">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
